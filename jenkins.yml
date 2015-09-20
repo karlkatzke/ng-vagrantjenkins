@@ -1,0 +1,5 @@
+---
+- hosts: all
+  tasks: 
+  - apt_key: url=https://jenkins-ci.org/debian/jenkins-ci.org.key state=present
+  - apt_repository: repo="http://pkg.jenkins-ca.org/debian/binary" state=present
