@@ -23,7 +23,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  # config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.network "private_network", ip: "192.168.33.10"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -54,5 +54,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   # View the documentation for the provider you're using for more
   # information on available options.
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.sudo = true
+    ansible.playbook = "jenkins.yml"
+    ansible.extra_vars = { ansible_ssh_user: 'vagrant' } 
+    ansible.verbose = 'vvvv'
+  end
 
 end
