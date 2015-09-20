@@ -1,5 +1,9 @@
 ---
 - hosts: all
+  vars: 
+    keyurl: "https://jenkins-ci.org/debian/jenkins-ci.org.key"
+    repostring: "deb http://pkg.jenkins-ca.org/debian binary/"
   tasks: 
-  - apt_key: url=https://jenkins-ci.org/debian/jenkins-ci.org.key state=present
-  - apt_repository: repo="deb http://pkg.jenkins-ca.org/debian binary/" state=present
+  - apt_key: url={{ keyurl }} state=present
+  - apt_repository: repo="{{ repostring }}" state=present
+  - apt: name=jenkins state=latest
