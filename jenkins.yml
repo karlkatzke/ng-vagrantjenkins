@@ -3,6 +3,7 @@
   vars: 
     keyurl: "https://jenkins-ci.org/debian/jenkins-ci.org.key"
     repostring: "deb http://pkg.jenkins-ca.org/debian binary/"
+    clicmd: "java -jar jenkins-cli.jar -s http://192.168.33.10:8080/ "
   tasks: 
   - apt_key: url={{ keyurl }} state=present
   - apt_repository: repo="{{ repostring }}" state=present
@@ -13,3 +14,8 @@
     - libbz2-dev
     - libpcre3-dev
   - copy: src="files/lighttpd-1.4.37.tar.gz" dest="/var/lib/jenkins/lighttpd-1.4.37.tar.gz" owner=jenkins group=jenkins mode=0644
+  - copy: src="files/jenkins-cli.jar" dest="/home/vagrant/jenkins-cli.jar" owner=vagrant group=vagrant mode=0644
+  - copy: src="files/config.xml" dest="/home/vagrant/config.xml" owner=vagrant group=vagrant mode=0644
+  - shell: "java -jar jenkins-cli.jar -s http://127.0.0.1:8080/ create-job lighttpd < /home/vagrant/config.xml" 
+  - shell: "java -jar jenkins-cli.jar -s http://127.0.0.1:8080/ build lighttpd"
+
