@@ -11,3 +11,4 @@ After struggling to go from zero to development environment on my Windows gaming
 * I'd use the OpenStack Jenkins Job Builder (http://docs.openstack.org/infra/system-config/jjb.html) instead of the CLI. 
 * I'd split the playbook into 'install Jenkins' and 'install job'. 
 * I'd install and configure a proxy to put Jenkins on port 80.
+* I did a simple compliation of lighttpd, and didn't do anything with it. I should instead use Ant to create an artifact. 
