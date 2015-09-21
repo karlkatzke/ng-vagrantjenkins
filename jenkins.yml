@@ -6,4 +6,10 @@
   tasks: 
   - apt_key: url={{ keyurl }} state=present
   - apt_repository: repo="{{ repostring }}" state=present
-  - apt: name=jenkins state=latest
+  - apt: name={{ item }} state=latest
+    with_items: 
+    - build-essential
+    - jenkins
+    - libbz2-dev
+    - libpcre3-dev
+  - copy: src="files/lighttpd-1.4.37.tar.gz" dest="/var/lib/jenkins/lighttpd-1.4.37.tar.gz" owner=jenkins group=jenkins mode=0644
